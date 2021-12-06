@@ -8,10 +8,12 @@
     <title>Instagram - {{title}}</title>
     {% else %}
     <title>Instagram</title>
-    {% endif %} {% block styles %} {% bootstrap_css %} {% endblock %}
+    {% endif %} {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    {% endblock %}
   </head>
   <body>
-    {% block content %}
+    {% include "navbar.html" %} {% block content %}
     <h1>Instagram</h1>
     {%endblock%} {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
