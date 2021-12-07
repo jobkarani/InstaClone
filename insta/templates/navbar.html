@@ -30,23 +30,25 @@
 
 <div class="col-sm-6 col-md-6">
   {% if user.is_authenticated %}
- 
-  <ul style="list-style: none; display: flex; margin-left:30rem;">
-    
-    <li >
-      <a href="{%url 'profile'%}" style="color: black;"><img src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635448__340.png" alt="" width="20px" height="20px"></a>
+  
+  <ul class="navbar-nav nav-right">
+    <li class="nav-item active">
+      <a class="nav-link" href="/"><i class="fa fa-home"></i></a>
     </li>
-    <li style="padding-left: 40px;">
-      <a class=""href="/"><img class="text-white" src="https://img.icons8.com/m_outlined/2x/home--v2.png" alt="" width= "20px" ></a>
-    </li>
-    <li style="padding-left: 40px;">
-      <a style ="color:black;" href="/admin" class="nav-item" active-color="black"><i class="fas fa-user-tie"></i>&nbsp;</a>
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-user"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="/profile">My Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/logout">Logout</a>
+        {% else %}
+        <a class='dropdown-item' href="/accounts/login">Login</a>
+      </div>
     </li>
   </ul>
-  {% else %}
-  <li>
-    <a class='btn btn-default' href="/accounts/login">Login</a>
-  </li>
+ 
+  
 
   {% endif %}
 </div>

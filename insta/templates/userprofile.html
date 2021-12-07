@@ -8,9 +8,9 @@
   <p class="text-center text-info">1 posts 0 followers 0 following</p>
   {{ user_profile.user.name }}
   <div class="row">
-    {% for posts in posts %}
+    {% for image in images %}
     <div class="col-md-6">
-      <img src="{{ posts.image.url}}" alt="" class="images" />
+      <img src="{{ image.image.url}}" alt="" class="images" />
     </div>
     {% endfor %}
   </div>

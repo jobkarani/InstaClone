@@ -6,8 +6,10 @@ from .forms import CommentForm
 from django.contrib.auth import login, authenticate
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def index(request):
     posts = Image.objects.all()
+    users = Profile.objects.all()
     form = CommentForm()
     if request.method == 'POST':  
         form = CommentForm(request.POST, request.FILES)
@@ -17,7 +19,7 @@ def index(request):
             commentt.save()
             return redirect('index')
             
-    return render(request, 'all-temps/index.html',{"posts":posts, "form":form})
+    return render(request, 'all-temps/index.html',{"posts":posts, "form":form, 'users':users})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):

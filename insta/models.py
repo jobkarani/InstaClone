@@ -61,7 +61,6 @@ class Profile(models.Model):
         
     def update(self):
         self.save()
-
     
         
     def __str__(self):
