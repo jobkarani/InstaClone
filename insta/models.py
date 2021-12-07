@@ -12,7 +12,7 @@ class Image(models.Model):
     name = models.CharField(max_length=40)
     caption = models.CharField(max_length=200)
     posted_on = models.DateTimeField(auto_now_add=True)
-    likes = models.IntegerField(default=True,null=True, blank=True)
+    like = models.IntegerField(default=True,null=True, blank=True)
     comment = models.IntegerField(blank=True,null=True,default=True)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     
@@ -38,9 +38,11 @@ class Image(models.Model):
     @property
     def saved_comments(self):
         return self.comments.all()
-        
+    
     def __str__(self):
         return self.name
+    
+liking={('like','like'),('unlike','unlike')}
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
@@ -71,5 +73,14 @@ class Comment(models.Model):
     def display_comment(cls,image_id):
         comments = cls.objects.filter(image_id = image_id)
         return comments
+    
+class Like(models.Model):
+    likes = models.CharField(choices=liking,default='like',max_length=50)
+    image = models.ForeignKey(Image,on_delete = models.CASCADE,related_name='likes')
+    user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='likes')
+    
+    def __str__(self):
+        return self.likes
+    
     
     

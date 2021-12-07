@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="post"
+  <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="POST"
       enctype="multipart/form-data">
       {% csrf_token%}
       
@@ -31,6 +31,16 @@
             {% endfor %}
             </div>
 
+            <form action = "{% url 'like-posts' %}"   method='POST'>
+              {% csrf_token %}
+              <input type="hidden" name="image_id" value="{{posts.id}}">
+              {%if user not in posts.liked.all %}
+              <button class="btn btn-success" type="submit">like</button>
+              {% else %}
+               <button class="" type="submit">Un-like</button>
+              {% endif %}
+            </form>
+              <strong>{{posts.liked.all.count}}Like(s)</strong>
 
   {% endfor %} 
   

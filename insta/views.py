@@ -1,8 +1,9 @@
-from django.shortcuts import render,get_object_or_404
-from django.http  import HttpResponse
-from .models import Image,Profile, Comment
+from django.shortcuts import render,get_object_or_404,redirect
+from django.http  import HttpResponse,HttpResponseRedirect
+from .models import Image,Profile, Comment, Like
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 def index(request):
@@ -38,6 +39,29 @@ def comments(request,image_id):
       comment.save() 
   return redirect('index') 
  
+def like_post(request):
+    current_user = request.user
+    
+    if request.method == 'POST':
+        image_id = request.POST.get('image_id')
+        image = Image.objects.get(id=image_id)
+        
+        if user in image.like.all():
+            image.like.add(user)
+        else:
+            image.like.add(user)
+            
+        like,created = Like.objects.get_or_create(user=current_user,image_id=image_id)  
+        
+        if not created:
+            if like.likes == 'like':
+                like.likes = 'unlike'
+                
+        else:
+                like.likes = 'like' 
+                
+        like.save()
+    return redirect('index')       
   
 def search_results(request):
 
