@@ -1,2 +1,15 @@
-{%extends 'all-temps/base.html'%} {% block content %} {{block.super}} {%
-endblock %}
+{%extends 'all-temps/base.html'%} {% block content %} {{block.super}}
+<div class="row">
+  {% for posts in posts%}
+  <div class="col-4">
+    
+    <div class="text-center mt-1">
+      <span>
+          <img src="{{posts.image.url}}" alt="" />
+        </a>
+      </span>
+    </div>
+  </div>
+
+  {% endfor %} {% endblock %}
+</div>

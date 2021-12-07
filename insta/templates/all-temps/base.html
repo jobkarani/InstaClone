@@ -8,10 +8,11 @@
     <title>Instagram - {{title}}</title>
     {% else %}
     <title>Instagram</title>
-    {% endif %} {% block styles %} {% bootstrap_css %}
+    {% endif %} {% block styles %} {% bootstrap_css %} {% load static %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     {% endblock %}
   </head>
+
   <body>
     {% include "navbar.html" %} {% block content %}
     <h1>Instagram</h1>

@@ -19,5 +19,5 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^insta/',include('insta.urls'))
+    url(r'',include('insta.urls'))
 ]
