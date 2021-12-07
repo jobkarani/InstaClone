@@ -1,2 +1,26 @@
-{%extends 'all-temps/base.html'%} {% block content %} {{block.super}} {%
-endblock %}
+{%extends 'all-temps/base.html'%} 
+{% block content %}
+{{block.super}}
+<div class="row">
+    {% if posts%}
+      <h2>Scanned {{ posts|length }} of searched term {{message}}</h2>
+    {% else %}
+      <h2> Scanned 0 posts for the search term {{message}}</h2>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+
+  {% if posts %}
+    {% for posts in posts %}
+      <div class="col-sm-6 col-md-3">
+          
+          <img src="{{posts.image.url}}" alt="xxx">
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+
+{% endblock %}
