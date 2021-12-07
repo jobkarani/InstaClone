@@ -2,6 +2,7 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 import datetime as dt
+from tinymce.models import HTMLField
 # Create your models here.
 
 # image
@@ -12,7 +13,7 @@ class Image(models.Model):
     caption = models.CharField(max_length=200)
     posted_on = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=True,null=True, blank=True)
-    comments = models.IntegerField(blank=True,null=True,default=True)
+    comment = models.IntegerField(blank=True,null=True,default=True)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     
     
@@ -33,6 +34,10 @@ class Image(models.Model):
     def search_by_name(cls,search_term):
         posts = cls.objects.filter(name__icontains=search_term)
         return posts
+    
+    @property
+    def saved_comments(self):
+        return self.comments.all()
         
     def __str__(self):
         return self.name
@@ -50,11 +55,21 @@ class Profile(models.Model):
         
     def update(self):
         self.save()
+
+    
         
     def __str__(self):
         return self.name
     
     
-        
+class Comment(models.Model):
+    comment = models.CharField(max_length=250)
+    image = models.ForeignKey(Image,on_delete = models.CASCADE,related_name='comments')
+    user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='comments')
+    
+    @classmethod
+    def display_comment(cls,image_id):
+        comments = cls.objects.filter(image_id = image_id)
+        return comments
     
     
