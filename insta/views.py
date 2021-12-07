@@ -46,19 +46,19 @@ def like_post(request):
         image_id = request.POST.get('image_id')
         image = Image.objects.get(id=image_id)
         
-        if user in image.like.all():
-            image.like.add(user)
+        if current_user in image.liked.all():
+            image.liked.add(current_user)
         else:
-            image.like.add(user)
+            image.liked.add(current_user)
             
         like,created = Like.objects.get_or_create(user=current_user,image_id=image_id)  
         
         if not created:
-            if like.likes == 'like':
-                like.likes = 'unlike'
+            if like.val == 'Like':
+                like.val = 'Unlike'
                 
         else:
-                like.likes = 'like' 
+                like.val = 'Like' 
                 
         like.save()
     return redirect('index')       

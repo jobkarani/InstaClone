@@ -12,7 +12,7 @@ class Image(models.Model):
     name = models.CharField(max_length=40)
     caption = models.CharField(max_length=200)
     posted_on = models.DateTimeField(auto_now_add=True)
-    like = models.IntegerField(default=True,null=True, blank=True)
+    liked= models.ManyToManyField(User,default=None,blank=True,related_name='liked')
     comment = models.IntegerField(blank=True,null=True,default=True)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     
@@ -39,10 +39,14 @@ class Image(models.Model):
     def saved_comments(self):
         return self.comments.all()
     
+    @property
+    def saved_likes(self):
+      return self.postslikes.count()
+    
     def __str__(self):
         return self.name
     
-liking={('like','like'),('unlike','unlike')}
+liking={('Like','Like'),('Unlike','Unlike')}
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
@@ -75,12 +79,12 @@ class Comment(models.Model):
         return comments
     
 class Like(models.Model):
-    likes = models.CharField(choices=liking,default='like',max_length=50)
-    image = models.ForeignKey(Image,on_delete = models.CASCADE,related_name='likes')
-    user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='likes')
+    val = models.CharField(choices=liking,default='like',max_length=50)
+    image = models.ForeignKey(Image,on_delete = models.CASCADE)
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
     
     def __str__(self):
-        return self.likes
+        return self.val
     
     
     

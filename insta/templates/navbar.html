@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navi" style=" border-bottom : inset #ff66b3;">
-  <a style ="color:black;" href="/admin" class="nav-item" active-color="black"><i class="fas fa-user-tie"></i>&nbsp;Admin</a>
+  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -30,16 +30,13 @@
 
 <div class="col-sm-6 col-md-6">
   {% if user.is_authenticated %}
-  <ul>
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                <span class="caret"></span>
-            </a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="{%url 'profile'%}">User</a>
-        </li>
-      </ul>
+  <ul style="list-style: none; display: flex; margin-left:30rem;">
+    
+    <li >
+      <a href="{%url 'profile'%}" style="color: black;"><img src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635448__340.png" alt="" width="20px" height="20px"></a>
+    </li>
+    <li style="padding-left: 40px;">
+      <a style ="color:black;" href="/admin" class="nav-item" active-color="black"><i class="fas fa-user-tie"></i>&nbsp;</a>
     </li>
   </ul>
   {% else %}

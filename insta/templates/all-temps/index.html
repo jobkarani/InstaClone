@@ -1,4 +1,6 @@
-{%extends 'all-temps/base.html'%} {% block content %} {{block.super}}
+{%extends 'all-temps/base.html'%} 
+{% load bootstrap4 %}
+{% block content %} {{block.super}}
 <br> <br>
 <div class="container">
 <div class="row">
@@ -16,7 +18,7 @@
   <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="POST"
       enctype="multipart/form-data">
       {% csrf_token%}
-      
+      {% bootstrap_form form %}
         <div class="form-group text-center">
             <input type="submit" class="btn btn-primary login-btn" value="Comment">
         </div>
@@ -35,13 +37,15 @@
             <form action = "{% url 'like_post' %}"   method='POST'>
               {% csrf_token %}
               <input type="hidden" name="image_id" value="{{posts.id}}">
-              {%if user not in posts.like.all %}
-              <button class="btn btn-success" type="submit">like</button>
+              {%if user not in posts.liked.all %}
+              <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
+                class="far fa-heart text-dark"></i> </button>
               {% else %}
-               <button class="" type="submit">Unlike</button>
+              <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
+                class="far fa-heart text-danger"></i> </button>
               {% endif %}
             </form>
-              <strong>{{posts.like.all.count}}Likes</strong>
+              <strong>{{posts.liked.all.count}}Likes</strong>
             </div>
   {% endfor %} 
 </div>
