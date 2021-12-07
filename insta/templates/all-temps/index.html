@@ -1,9 +1,10 @@
 {%extends 'all-temps/base.html'%} {% block content %} {{block.super}}
 <br> <br>
+<div class="container">
 <div class="row">
   {% for posts in posts%}
-  <div class="col-4">
-    
+  <div class="col-6">
+  <div class="card">
     <div class="text-center mt-1">
       <span>
           <img src="{{posts.image.url}}" alt="" />
@@ -31,18 +32,18 @@
             {% endfor %}
             </div>
 
-            <form action = "{% url 'like-posts' %}"   method='POST'>
+            <form action = "{% url 'like_post' %}"   method='POST'>
               {% csrf_token %}
               <input type="hidden" name="image_id" value="{{posts.id}}">
-              {%if user not in posts.liked.all %}
+              {%if user not in posts.like.all %}
               <button class="btn btn-success" type="submit">like</button>
               {% else %}
-               <button class="" type="submit">Un-like</button>
+               <button class="" type="submit">Unlike</button>
               {% endif %}
             </form>
-              <strong>{{posts.liked.all.count}}Like(s)</strong>
-
+              <strong>{{posts.like.all.count}}Likes</strong>
+            </div>
   {% endfor %} 
-  
+</div>
   {% endblock %}
 </div>
