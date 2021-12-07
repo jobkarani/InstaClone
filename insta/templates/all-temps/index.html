@@ -7,9 +7,15 @@
   {% for posts in posts%}
   <div class="col-6">
   <div class="card">
+    <div class="name" style="display: flex; padding-right: 200px;">
+    <div>
+      <a href="url 'user.profile' posts.user.id">
+        <img src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635448__340.png" alt="" width="20px" height="20px">&nbsp;</a>
+    </div>
     <div>
       <a href="url 'user.profile' posts.user.id" style="color: black;"><p><b>{{ posts.user.username }}</b></p></a>
     </div>
+  </div>
     <div class="text-center mt-1">
       <span>
           <img src="{{posts.image.url}}" alt="" />
@@ -48,8 +54,17 @@
                 class="far fa-heart text-danger"></i> </button>
               {% endif %}
             </form>
+            <div class="likes">
               <strong>{{posts.liked.all.count}}Likes</strong>
             </div>
+              <div class="caption">
+                <strong>{{posts.caption}}</strong>
+              </div>
+              <div class="date" style="background-color: #787A91;">
+                <strong>{{posts.posted_on}}</strong>
+              </div>
+            </div>
+            
           </div>
   {% endfor %} 
 </div>
