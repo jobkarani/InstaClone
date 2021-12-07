@@ -1,0 +1,87 @@
+{% extends "all-temps/base.html" %}
+{% block content %}
+
+<section class="profile container">
+    <div class=" mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    {% if profile.profile_photo %}
+                    <img src="{{profile.profile_photo.url}}" alt="" class="card-img-top">
+                    {%else%}
+                    <img src=""
+                        class="card-img-top" alt="xxx">
+                    {% endif %}
+                    <div class="card-body text-center">
+                        <h4 class="card-text">
+                            {{ user.first_name }} {{ user.last_name }}
+                        </h4>
+                        <p>{{ user.username }}</p>
+                        <p>
+                            {% if profile.bio %}
+                            <small>{{ profile.bio }}</small>
+                            {% else %}
+                            <span class="text-danger">No bio</span>
+                            {% endif %}
+                        </p>
+                        <h6>Joined on:<br> <span class="badge rounded-pill bg-secondary text-white">
+                                {{ user.date_joined|date }} </span></h6>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-12">
+        <div class = "" data-toggle ="modal" data-target="#showPicModal">
+            <button class="btn btn-info  btn-lg">add photo</button>
+        </div>
+    </div>
+    <div class="modal fade" id="showPicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mode" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalPictureTitle">Title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+              {% load crispy_forms_tags %}
+
+             <form method="post" style="margin-top: 3vh;"enctype="multipart/form-data">
+                 {{ form | crispy }}
+                 {% csrf_token %}
+                    <button type="submit" class="btn btn-info  btn-lg">Submit</button>
+             </form>
+            </div>
+            <div class="modal-footer">
+                
+                
+            </div>
+          </div>
+        </div>
+</section>
+
+
+<div class="container" id="">
+<h3 class="post-title" id="ig-text">My &nbsp;Posts:</h3>
+    {% for posts in posts %}
+    <div class="col-md-4" id="post-image">
+        
+            <div class="card mb-4">
+                <img src="{{ posts.image.url }}" class="img-responsive" alt="xxx">
+            </div>
+    </div>
+    {% empty %}
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="alert alert-info" role="alert">
+            No posts!
+        </div>
+    </div>
+</div>
+    {% endfor %}
+{% endblock %}

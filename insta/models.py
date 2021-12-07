@@ -37,7 +37,7 @@ class Image(models.Model):
     def __str__(self):
         return self.name
     
-class profile(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
     profile_photo = CloudinaryField('image')
     bio = models.TextField(max_length=650,blank=True,null=True)

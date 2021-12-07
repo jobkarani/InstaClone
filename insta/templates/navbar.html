@@ -28,4 +28,26 @@
 </div>
 <!-- search form end -->
 
+<div class="col-sm-6 col-md-6">
+  {% if user.is_authenticated %}
+  <ul>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
+                <span class="caret"></span>
+            </a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="{%url 'profile'%}">User</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  {% else %}
+  <li>
+    <a class='btn btn-default' href="/accounts/login">Login</a>
+  </li>
+
+  {% endif %}
+</div>
+
 </nav>
