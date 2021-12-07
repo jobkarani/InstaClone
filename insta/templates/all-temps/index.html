@@ -7,13 +7,16 @@
   {% for posts in posts%}
   <div class="col-6">
   <div class="card">
+    <div>
+      <a href="url 'user.profile' posts.user.id" style="color: black;"><p><b>{{ posts.user.username }}</b></p></a>
+    </div>
     <div class="text-center mt-1">
       <span>
           <img src="{{posts.image.url}}" alt="" />
         </a>
       </span>
     </div>
-  </div>
+  
 
   <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="POST"
       enctype="multipart/form-data">
@@ -26,7 +29,7 @@
             <br>
 
   </form>
-        <div>
+          <div>
             <p>Comments:</p>
             {% for comment in posts.saved_comments %}
             <p> <span><strong>{{comment.user}}</strong></span>: {{comment.comment}}</p>
@@ -47,6 +50,7 @@
             </form>
               <strong>{{posts.liked.all.count}}Likes</strong>
             </div>
+          </div>
   {% endfor %} 
 </div>
   {% endblock %}
