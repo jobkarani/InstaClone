@@ -1,4 +1,5 @@
 {%extends 'all-temps/base.html'%} {% block content %} {{block.super}}
+<br> <br>
 <div class="row">
   {% for posts in posts%}
   <div class="col-4">
@@ -11,5 +12,27 @@
     </div>
   </div>
 
-  {% endfor %} {% endblock %}
+  <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="post"
+      enctype="multipart/form-data">
+      {% csrf_token%}
+      
+        <div class="form-group text-center">
+            <input type="submit" class="btn btn-primary login-btn" value="Comment">
+        </div>
+            <input type="hidden" name="next" value="{{next}}">
+            <br>
+
+  </form>
+        <div>
+            <p>Comments:</p>
+            {% for comment in posts.saved_comments %}
+            <p> <span><strong>{{comment.user}}</strong></span>: {{comment.comment}}</p>
+
+            {% endfor %}
+            </div>
+
+
+  {% endfor %} 
+  
+  {% endblock %}
 </div>
