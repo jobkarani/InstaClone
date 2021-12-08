@@ -8,8 +8,9 @@ from django.contrib.auth import login, authenticate
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def index(request):
-    posts = Image.objects.all()
+    posts = Image.objects.all().order_by('-id')
     users = Profile.objects.all()
+    # Images = Image.objects.all().order_by('-id')
     form = CommentForm()
     if request.method == 'POST':  
         form = CommentForm(request.POST, request.FILES)
@@ -19,7 +20,7 @@ def index(request):
             commentt.save()
             return redirect('index')
             
-    return render(request, 'all-temps/index.html',{"posts":posts, "form":form, 'users':users})
+    return render(request, 'all-temps/index.html',{"posts":posts,  "form":form, 'users':users})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
