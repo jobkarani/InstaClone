@@ -24,6 +24,25 @@
     </div>
   
 
+    <form action = "{% url 'like_post' %}"   method='POST'>
+      {% csrf_token %}
+      <input type="hidden" name="image_id" value="{{posts.id}}">
+      {%if user not in posts.liked.all %}
+      <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
+        class="far fa-heart text-dark"></i> </button>
+      {% else %}
+      <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
+        class="far fa-heart text-danger"></i> </button>
+      {% endif %}
+    </form>
+    <div class="likes">
+      <strong>{{posts.liked.all.count}}Likes</strong>
+    </div>
+      <div class="caption">
+        <a href="url 'user.profile' posts.user.id" style="color: black;"><p><b>{{ posts.user.username }}</b> &nbsp; {{posts.caption}}</p></a>
+      </div>
+      
+
   <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="POST"
       enctype="multipart/form-data">
       {% csrf_token%}
@@ -42,27 +61,9 @@
 
             {% endfor %}
             </div>
-
-            <form action = "{% url 'like_post' %}"   method='POST'>
-              {% csrf_token %}
-              <input type="hidden" name="image_id" value="{{posts.id}}">
-              {%if user not in posts.liked.all %}
-              <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
-                class="far fa-heart text-dark"></i> </button>
-              {% else %}
-              <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
-                class="far fa-heart text-danger"></i> </button>
-              {% endif %}
-            </form>
-            <div class="likes">
-              <strong>{{posts.liked.all.count}}Likes</strong>
+            <div class="date" style="background-color: #787A91; border-radius: 10px; width: 40%;">
+              <strong>{{posts.posted_on}}</strong>
             </div>
-              <div class="caption">
-                <a href="url 'user.profile' posts.user.id" style="color: black;"><p><b>{{ posts.user.username }}</b> &nbsp; {{posts.caption}}</p></a>
-              </div>
-              <div class="date" style="background-color: #787A91; border-radius: 10px; width: 40%;">
-                <strong>{{posts.posted_on}}</strong>
-              </div>
             </div>
           </div> 
   {% endfor %} 
