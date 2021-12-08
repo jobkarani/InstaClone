@@ -14,7 +14,7 @@ class Image(models.Model):
     posted_on = models.DateTimeField(auto_now_add=True)
     liked= models.ManyToManyField(User,default=None,blank=True,related_name='liked')
     comment = models.IntegerField(blank=True,null=True,default=True)
-    profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     
     
     class meta:

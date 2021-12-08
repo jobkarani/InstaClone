@@ -49,13 +49,12 @@
             </div>
             <div class="modal-body">
               
-              {% load crispy_forms_tags %}
 
-             <form method="post" style="margin-top: 3vh;"enctype="multipart/form-data">
-                 {{ form | crispy }}
-                 {% csrf_token %}
-                    <button type="submit" class="btn btn-info  btn-lg">Submit</button>
-             </form>
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Add Post</button>
+              </form>
             </div>
             <div class="modal-footer">
                 

@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http  import HttpResponse,HttpResponseRedirect
 from .models import Image,Profile, Comment, Like
 from django.contrib.auth.decorators import login_required
-from .forms import CommentForm
+from .forms import CommentForm, AddPostForm
 from django.contrib.auth import login, authenticate
 
 # Create your views here.
@@ -26,7 +26,16 @@ def profile(request):
     current_user = request.user
     posts = Image.objects.filter(user=current_user)
     profile = Profile.objects.filter(user_id=current_user.id)
-    return render(request, 'all-temps/profile.html', {"posts": posts, "profile": profile})
+    form = AddPostForm()
+    if request.method == 'POST':
+        form = AddPostForm(request.POST , request.FILES)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+        redirect('profile')
+    return render(request, 'all-temps/profile.html', {"posts": posts, "profile": profile, 'form':form})
+
+
   
 @login_required
 def comments(request,image_id):
