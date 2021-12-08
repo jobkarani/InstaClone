@@ -10,6 +10,7 @@ django-bootstrap4==21.1
 django-crispy-forms==1.13.0
 django-cloudinary-storage==0.3.0
 django-heroku==0.3.1
+django-tinymce
 gunicorn==20.1.0
 idna==3.3
 importlib-metadata==3.10.1
