@@ -1,75 +1,77 @@
-{%extends 'all-temps/base.html'%} 
+{%extends 'all-temps/base.html'%}
 {% load bootstrap4 %}
 {% block content %} {{block.super}}
 <br> <br>
 <div class="container">
-<div class="row">
-  {% for posts in posts%}
-  <div class="col-6">
-  <div class="card">
-    <div class="name" style="display: flex;">
-    <div>
-      <a href="url 'user.profile' posts.user.id">
-        <img src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635448__340.png" alt="" width="20px" height="20px">&nbsp;</a>
-    </div>
-    <div>
-      <a href="url 'user.profile' posts.user.id" style="color: black;"><p><b>{{ posts.user.username }}</b></p></a>
+  <div class="row">
+    <div class="col-md-6">
+      {% for posts in posts%}
+      <div class="card">
+        <div class="name" style="display: flex;">
+          <div>
+            <a href="url 'user.profile' posts.user.id">
+              <img src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635448__340.png" alt="" width="20px"
+                height="20px">&nbsp;</a>
+          </div>
+          <div>
+            <a href="url 'user.profile' posts.user.id" style="color: black;">
+              <p><b>{{ posts.user.username }}</b></p>
+            </a>
+          </div>
+        </div>
+        <div class="text-center mt-1">
+          <span>
+            <img src="{{posts.image.url}}" alt="" />
+            </a>
+          </span>
+        </div>
+
+
+        <form action="{% url 'like_post' %}" method='POST'>
+          {% csrf_token %}
+          <input type="hidden" name="image_id" value="{{posts.id}}">
+          {%if user not in posts.liked.all %}
+          <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
+              class="far fa-heart text-dark"></i> </button>
+          {% else %}
+          <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
+              class="far fa-heart text-danger"></i> </button>
+          {% endif %}
+        </form>
+        <div class="likes">
+          <strong>{{posts.liked.all.count}}Likes</strong>
+        </div>
+        <div class="caption">
+          <a href="url 'user.profile' posts.user.id" style="color: black;">
+            <p><b>{{ posts.user.username }}</b> &nbsp; {{posts.caption}}</p>
+          </a>
+        </div>
+
+
+        <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="POST"
+          enctype="multipart/form-data">
+          {% csrf_token%}
+          {% bootstrap_form form %}
+          <div class="form-group text-center">
+            <input type="submit" class="btn btn-primary login-btn" value="Comment">
+          </div>
+          <input type="hidden" name="next" value="{{next}}">
+          <br>
+
+        </form>
+        <div>
+          <p>Comments:</p>
+          {% for comment in posts.saved_comments %}
+          <p> <span><strong>{{comment.user}}</strong></span>: {{comment.comment}}</p>
+
+          {% endfor %}
+        </div>
+        <div class="date" style="background-color: #787A91; border-radius: 10px; width: 40%;">
+          <strong>{{posts.posted_on}}</strong>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
-    <div class="text-center mt-1">
-      <span>
-          <img src="{{posts.image.url}}" alt="" />
-        </a>
-      </span>
-    </div>
-  
-
-    <form action = "{% url 'like_post' %}"   method='POST'>
-      {% csrf_token %}
-      <input type="hidden" name="image_id" value="{{posts.id}}">
-      {%if user not in posts.liked.all %}
-      <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
-        class="far fa-heart text-dark"></i> </button>
-      {% else %}
-      <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
-        class="far fa-heart text-danger"></i> </button>
-      {% endif %}
-    </form>
-    <div class="likes">
-      <strong>{{posts.liked.all.count}}Likes</strong>
-    </div>
-      <div class="caption">
-        <a href="url 'user.profile' posts.user.id" style="color: black;"><p><b>{{ posts.user.username }}</b> &nbsp; {{posts.caption}}</p></a>
-      </div>
-      
-
-  <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="POST"
-      enctype="multipart/form-data">
-      {% csrf_token%}
-      {% bootstrap_form form %}
-        <div class="form-group text-center">
-            <input type="submit" class="btn btn-primary login-btn" value="Comment">
-        </div>
-            <input type="hidden" name="next" value="{{next}}">
-            <br>
-
-  </form>
-          <div>
-            <p>Comments:</p>
-            {% for comment in posts.saved_comments %}
-            <p> <span><strong>{{comment.user}}</strong></span>: {{comment.comment}}</p>
-
-            {% endfor %}
-            </div>
-            <div class="date" style="background-color: #787A91; border-radius: 10px; width: 40%;">
-              <strong>{{posts.posted_on}}</strong>
-            </div>
-            </div>
-          </div> 
-  {% endfor %} 
-  
-
 </div>
-</div>
-  {% endblock %}
-
+{% endblock %}
