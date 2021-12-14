@@ -36,19 +36,6 @@ def profile(request):
         redirect('profile')
     return render(request, 'all-temps/profile.html', {"posts": posts, "profile": profile, 'form':form})
 
-@login_required(login_url='/accounts/login/')
-def one_image(request, id):
-    image = Image.objects.get(id=id)
-    images_related = Image.objects.filter(
-        user_id = image.user_id
-    ).order_by('-posted_on')
-    title = image.name
-    
-    if Image.objects.filter(id=id).exists():
-        comments= Comment.objects.filter(image_id=id)
-        return render(request, 'all-temps/image.html', {'image':image, 'comments':comments,'title':title, 'images':images_related})
-    else:
-        return redirect('/')
   
 @login_required
 def comments(request,image_id):

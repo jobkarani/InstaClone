@@ -1,19 +1,22 @@
 {%extends "all-temps/base.html"%} {% load bootstrap4 %} {% block content %}
 <br /><br /><br />
 <br /><br /><br />
-<div class="container">
-  <h2>{{ user_profile.user.username }}</h2>
-  <h3 class="text-center">{{ user_profile.user.username}}</h3>
-  <br />
+
+<div class="jumbotron">
+  <h3>{{ user_profile.user.username }}</h3>
   <p class="text-center text-info">1 posts 0 followers 0 following</p>
-  {{ user_profile.user.name }}
-  <div class="row">
-    {% for image in images %}
-    <div class="col-md-6">
-      <img src="{{ image.image.url}}" alt="" class="images" />
-    </div>
-    {% endfor %}
-  </div>
+
 </div>
 
+{% for image in images %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <img src="{{ image.image.url}}" alt="" class="images" />
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

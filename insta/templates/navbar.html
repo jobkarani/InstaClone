@@ -8,8 +8,7 @@
     <div class="navbar-nav text-white">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" id="name" aria-current="page" href="/"
-            style="padding-left: 10rem;">Instagram</span></a>
+          <a class="nav-link active" id="name" aria-current="page" href="/">Instagram</span></a>
         </li>
       </ul>
     </div>
@@ -42,11 +41,11 @@
         <i class="fa fa-user"></i>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{%url 'profile'%}">My Profile</a>
+        <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/logout">Logout</a>
         {% else %}
-        <a class='dropdown-item' href="/accounts/login">Login</a>
+        <a class='dropdown-item' href="/login">Login</a>
       </div>
       </li>
     </ul>

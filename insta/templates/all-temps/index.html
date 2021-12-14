@@ -1,7 +1,7 @@
 {%extends 'all-temps/base.html'%}
 {% load bootstrap4 %}
 {% block content %} {{block.super}}
-<br>
+<br> <br>
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -11,7 +11,7 @@
           <div>
             <a href="{% url 'user_profile' posts.user.id %}">
               <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792__340.png" alt="" width="20px"
-                height="20px">&nbsp;</a>
+                height="20px">&nbsp;&nbsp;&nbsp;</a>
           </div>
           <div>
             <a href="{% url 'user_profile' posts.user.id %}" style="color: black;">
@@ -48,7 +48,7 @@
         </div>
 
 
-        <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" method="POST"
+        <form action="{% url 'comments' image_id=posts.id%}" class="comment-form com" id="commentform" method="POST"
           enctype="multipart/form-data">
           {% csrf_token%}
           {% bootstrap_form form %}
@@ -58,7 +58,7 @@
           <input type="hidden" name="next" value="{{next}}">
           <br>
         </form>
-        <div>
+        <div class="comments">
           <p>Comments:</p>
           {% for comment in posts.saved_comments %}
           <p> <span><strong>{{comment.user}}</strong></span>: {{comment.comment}}</p>

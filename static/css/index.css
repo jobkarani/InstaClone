@@ -3,7 +3,26 @@ h1 {
 }
 #name {
   font-family: "Open Sans Condensed", sans-serif;
+  font-weight: 900;
+  font-style: oblique;
+  font-size: xx-large;
+  padding-left: 15rem;
 }
 .card {
   margin-bottom: 5%;
+}
+.name,
+.likes,
+.caption,
+.btn-light,
+.comments,
+.date {
+  padding-left: 5%;
+}
+#commentform {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+#cont {
+  margin: 15%;
 }
