@@ -1,6 +1,9 @@
 h1 {
   color: green;
 }
-.nav-link {
+#name {
   font-family: "Open Sans Condensed", sans-serif;
+}
+.card {
+  margin-bottom: 5%;
 }
