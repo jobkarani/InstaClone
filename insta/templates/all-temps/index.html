@@ -9,12 +9,12 @@
       <div class="card">
         <div class="name" style="display: flex; ">
           <div>
-            <a href="url 'user.profile' posts.user.id">
-              <img src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635448__340.png" alt="" width="20px"
+            <a href="{% url 'user_profile' posts.user.id %}">
+              <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792__340.png" alt="" width="20px"
                 height="20px">&nbsp;</a>
           </div>
           <div>
-            <a href="url 'user.profile' posts.user.id" style="color: black;">
+            <a href="{% url 'user_profile' posts.user.id %}" style="color: black;">
               <p><b>{{ posts.user.username }}</b></p>
             </a>
           </div>
@@ -53,11 +53,10 @@
           {% csrf_token%}
           {% bootstrap_form form %}
           <div class="form-group text-center">
-            <input type="submit" class="btn btn-primary login-btn" value="Comment">
+            <input type="submit" class="btn btn-primary login-btn" value="Post">
           </div>
           <input type="hidden" name="next" value="{{next}}">
           <br>
-
         </form>
         <div>
           <p>Comments:</p>

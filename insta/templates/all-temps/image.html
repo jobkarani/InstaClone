@@ -1,0 +1,38 @@
+{% extends "all-temps/base.html" %}
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{{posts.image.url}}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md 12">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <div class="card-text">
+                                        <p> {{posts.caption}}</p>
+                                    </div>
+                                    <div class="card-text">
+                                        <p>Posted on {{posts.posted_on|timesince}} ago</p>
+                                    </div>
+
+                                    {% if comments %}
+                                    {% for %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

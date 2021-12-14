@@ -1,17 +1,20 @@
 {% extends "all-temps/base.html" %}
 {% block content %}
 <br> <br>
-<section class="profile container" style="align-items: center;">
+<section style="align-items: center;">
+
     <div class=" mt-5">
         <div class="row">
             <div class="col-md-3">
-                <div class="card">
-                    {% if profile.profile_photo %}
-                    <img src="{{profile.profile_photo.url}}" alt="" class="card-img-top">
-                    {%else%}
-                    <img src="https://cdn.pixabay.com/photo/2016/08/21/16/31/emoticon-1610228__340.png"
-                        class="card-img-top" alt="xxx">
-                    {% endif %}
+                <div class="jumbotron" style="width: 100%;">
+                    <div class="img">
+                        {% if profile.profile_photo %}
+                        <img src="{{profile.profile_photo.url}}" alt="" class="card-img-top">
+                        {%else%}
+                        <img src="https://cdn.pixabay.com/photo/2016/08/21/16/31/emoticon-1610228__340.png"
+                            class="card-img-top" alt="xxx">
+                        {% endif %}
+                    </div>
                     <div class="card-body text-center">
                         <h4 class="card-text">
                             {{ user.first_name }} {{ user.last_name }}
@@ -26,53 +29,51 @@
                         </p>
                         <h6>Joined on:<br> <span class="badge rounded-pill bg-secondary text-white">
                                 {{ user.date_joined|date }} </span></h6>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <div class="col-md-12">
-        <div class = "" data-toggle ="modal" data-target="#profileModal">
-            <button class="btn btn-info  btn-lg"><i class="far fa-plus-square">add photo</i></button>
+        <br>
+        <div class="col-md-12">
+            <div class="" data-toggle="modal" data-target="#profileModal">
+                <button class="btn btn-info  btn-lg"><i class="far fa-plus-square">add photo</i></button>
+            </div>
         </div>
-    </div>
-    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mode" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalPictureTitle">Title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              
+        <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mode" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalPictureTitle">Title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-              <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form }}
-                <button type="submit">Add Post</button>
-              </form>
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button type="submit">Add Post</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                
-                
-            </div>
-          </div>
         </div>
 </section>
 
 
-<div class="container" id="">
-<h3 class="post-title" id="ig-text">My &nbsp;Posts:</h3>
+<div class="container">
+    <h3 class="post-title">Posts</h3>
     {% for posts in posts %}
     <div class="col-md-4" id="post-image">
-        
-            <div class="card mb-4">
-                <img src="{{ posts.image.url }}" class="img-responsive" alt="xxx">
-            </div>
+
+        <div class="card mb-4">
+            <img src="{{ posts.image.url }}" class="img-responsive" alt="xxx">
+        </div>
+
     </div>
     {% empty %}
     <div class="col-md-4"></div>
@@ -82,5 +83,5 @@
         </div>
     </div>
 </div>
-    {% endfor %}
+{% endfor %}
 {% endblock %}
