@@ -68,10 +68,6 @@ class LikeTestCase(TestCase):
             user_id=user.id
         )
          
-         Like.objects.create(
-             user_id = user.id,
-             image_id = image.id
-         )
          
     def test_image_id(self):
          user = User.objects.create(
