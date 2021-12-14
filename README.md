@@ -10,7 +10,7 @@ InstaClone is webapp where a user can be able to create an account,post their ow
 
 ## Live Link
 
-This is the live link to the project <a href="https://instaclonnee.herokuapp.com/accounts/login/?next=/">view
+This is the live link to the project <a href="https://instaclonnee.herokuapp.com/">view
 </a>
 
 ## Development
